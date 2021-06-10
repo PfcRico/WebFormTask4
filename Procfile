@@ -1,1 +1,1 @@
-web: java -jar target/webform.war
+web: java $JAVA_OPTS -jar target/webform.war --port $PORT target/*.war
