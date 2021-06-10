@@ -1,1 +1,1 @@
-web: web: java -jar target/webform.jar
+web: java -jar target/webform.jar
