@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/webform.jar --port $PORT target/*.jar
+web: java -Dserver.port=$PORT -jar target/webform.jar
