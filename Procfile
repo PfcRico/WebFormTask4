@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/webform.jar
+web: java -Dserver.port=$PORT -jar target/webform.war
