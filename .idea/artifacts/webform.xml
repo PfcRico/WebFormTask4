@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webform">
+    <output-path>$PROJECT_DIR$/out/artifacts/webform</output-path>
+    <root id="archive" name="webform.war" />
+  </artifact>
+</component>
