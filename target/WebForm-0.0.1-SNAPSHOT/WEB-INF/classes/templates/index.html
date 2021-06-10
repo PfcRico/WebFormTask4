@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration and Login App</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+</head>
+<body>
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">WebForm</a>
+			</div>
+
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div class="container">
+		<nav class="navbar navbar-light" style="background-color: white; text-align: center">
+
+			<ul class="list-inline">
+				<li class="list-inline-item">
+			<form th:action="@{/block}" th:method="post">
+
+				<button type="submit" class="form-inline pull-right btn-lg" th:value="block">
+					<i class="fas fa-lock" aria-hidden="true"></i>
+				</button>
+			</form>
+			</li>
+			<li class="list-inline-item">
+			<form th:action="@{/unblock}" th:method="post">
+				<button type="submit" class="form-inline pull-right btn-lg" th:value="unblock">
+					<i class="fas fa-unlock" aria-hidden="true"></i>
+				</button>
+			</form>
+			</li>
+			<li class="list-inline-item">
+			<form th:action="@{/delete}" th:method="post">
+				<button type="submit" class="form-inline pull-right btn-lg" th:value="delete">
+					<i class="fas fa-trash-alt" aria-hidden="true"></i>
+				</button>
+			</form>
+			</li>
+			</ul>
+		</nav>
+	</div>
+	<div class = "container">
+	<table class="table">
+		<thead>
+		<tr>
+			<th scope="col" class="text-center">
+				<form th:action="@{/receive}" th:method="post" >
+				<input type="hidden" th:value="all"/>
+					<input type="submit" value="Select"/>
+				</form></th>
+			<th scope="col" class="text-center">ID</th>
+			<th scope="col" class="text-center">First Name</th>
+			<th scope="col" class="text-center">Last Name</th>
+			<th scope="col" class="text-center">UserName</th>
+			<th scope="col" class="text-center">Registration</th>
+			<th scope="col" class="text-center">LastOnline</th>
+			<th scope="col" class="text-center">Active</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="user : ${users}">
+			<th scope="row" class="text-center">
+				<form th:action="@{/select}" th:method="post" >
+					<input type="hidden" th:value="${user.email}" th:name="email"/>
+					<input type="submit" th:value="${user.selected} ? 'UNS' : 'SEL'"/>
+				</form></th>
+				</th>
+			<td th:text="${user.id}" class="text-center"/>
+			<td th:text="${user.firstName}" class="text-center"/>
+			<td th:text="${user.lastName}" class="text-center"/>
+			<td th:text="${user.email}" class="text-center" />
+			<td th:text="${#dates.format(user.registration, 'dd-MM-yyyy HH:mm')}" class="text-center" />
+			<td th:text="${#dates.format(user.lastOnline, 'dd-MM-yyyy HH:mm')}" class="text-center" />
+			<td th:text="${user.active}" class="text-center" />
+
+
+		</tr>
+		</tbody>
+	</table>
+	</div>
+</body>
+</html>
