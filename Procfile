@@ -1,1 +1,1 @@
-web: web: java -jar target/webformtask4.jar
+web: web: java -jar target/webform.jar
